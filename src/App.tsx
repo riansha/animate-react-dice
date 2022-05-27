@@ -32,6 +32,7 @@ function App() {
     if (intervalDice) {
       return;
     }
+    setDice(0);
     setIsPlaying(true);
     const randDice = Math.floor(6 * Math.random()) + 1;
     setDice(randDice);
@@ -69,7 +70,6 @@ function App() {
       setIntervalDice(null);
       setIsPlaying(false);
       setCounterInterval(0);
-      setDice(0);
     }
   }, [counterInterval, dice, isPlaying]);
 
