@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import styles from "./styles.module.scss";
 import gsap from "gsap";
@@ -29,6 +29,11 @@ function App() {
       { id: 10, color: "#50707A", coord: { x: 0, y: 160 } },
     ],
     []
+  );
+
+  const gameOver = useMemo(
+    () => currentState?.position >= dataBoard?.length - 1,
+    [currentState, dataBoard]
   );
 
   const rollDice = () => {
@@ -66,21 +71,19 @@ function App() {
     }, durationAnimation);
   };
 
+  const init = () => {
+    gsap.to(unitRef?.current, {
+      x: dataBoard?.[0]?.coord?.x,
+      y: dataBoard?.[0]?.coord?.y,
+      duration: 0,
+    });
+  };
+
   useEffect(() => {
     if (unitRef?.current) {
-      gsap.to(unitRef?.current, {
-        x: dataBoard?.[0]?.coord?.x,
-        y: dataBoard?.[0]?.coord?.y,
-        duration: 0,
-      });
+      init();
     }
-  }, [unitRef, dataBoard]);
-
-  // useEffect(() => {
-  //   if (currentState?.position >= dataBoard?.length - 1) {
-  //     setCurrentState({ position: 0 });
-  //   }
-  // }, [currentState]);
+  }, [unitRef]);
 
   return (
     <div className={styles.container}>
@@ -100,14 +103,15 @@ function App() {
           <button
             className={styles.btnAction}
             onClick={rollDice}
-            // onClick={actionHandler}
             disabled={isPlaying || isMoving}
           >
-            {currentState?.position >= dataBoard?.length - 1
-              ? "Restart"
-              : "Roll Dice!"}
+            {gameOver ? "Restart" : "Roll Dice!"}
           </button>
-          <p className={styles.info}>{"*You will move when dice is > 3"}</p>
+          {gameOver ? (
+            <p className={styles.info}>You Won!!!</p>
+          ) : (
+            <p className={styles.info}>{"*You will move when dice is > 3"}</p>
+          )}
         </div>
       </div>
     </div>
