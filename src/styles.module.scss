@@ -1,26 +1,21 @@
 $duration: 500ms;
 
-.container {
-    position: relative;
+*,
+*::after,
+*::before {
     box-sizing: border-box;
+}
+
+.container {
+    background-color: #2a9f90;
+    position: relative;
     padding: 20px;
     .containerBoard {
+        background: rgba(101, 187, 51, 0.2);
         position: relative;
-        height: 100vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .itemBoard {
-            position: relative;
-            width: calc(100% / 7);
-            &::before {
-                display: block;
-                content: "";
-                width: 100%;
-                padding-bottom: 100%;
-            }
-        }
+        height: calc(100vh - 40px);
+        width: 70%;
+        margin-left: auto;
         .btnContainer {
             position: absolute;
             z-index: 101;
@@ -28,10 +23,16 @@ $duration: 500ms;
             right: 20%;
             display: flex;
             flex-flow: column;
+            .info {
+                color: #ffffff;
+            }
         }
         .containerUnit {
+            // background: rgba(255, 0, 0, 0.3);
             z-index: 99;
-            width: calc(100% / 7);
+            // width: calc(100% / 7);
+            width: 120px;
+            height: 120px;
             position: absolute;
             top: 0;
             left: 0;

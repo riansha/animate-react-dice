@@ -1,0 +1,28 @@
+.itemBoard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    // background: rgba(255, 255, 255, 0.4);
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 10%;
+        border-radius: 50px;
+        background: #1a5f52;
+    }
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 5%;
+        width: 100%;
+        height: 10%;
+        border-radius: 50px;
+        background: #ffffff;
+    }
+}
